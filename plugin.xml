@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e107Plugin name="PayPal Donation" lan="LAN_PLUGIN_PAYPAL_DONATION_NAME" version="1.0" date="2015-12-05" compatibility="2.0" installRequired="true">
+	<author name="lonalore" url="http://lonalore.hu"/>
+	<description lan="LAN_PLUGIN_PAYPAL_DONATION_DESCRIPTION">The aim of this plugin is to give a more dynamic and customisable PayPal donation button as the default one.</description>
+	<category>content</category>
+	<copyright></copyright>
+	<adminLinks>
+		<link url='admin_config.php' description='LAN_CONFIGURE' icon='images/paypal_donation_32.png' iconSmall='images/paypal_donation_16.png' primary='true' >LAN_CONFIGURE</link>
+	</adminLinks>
+	<pluginPrefs>
+		<pref name="sandbox_mode">0</pref>
+		<pref name="email_sandbox"></pref>
+		<pref name="email_live"></pref>
+		<pref name="validate_email">1</pref>
+		<pref name="logging_failed_ipn">1</pref>
+	</pluginPrefs>
+</e107Plugin>
