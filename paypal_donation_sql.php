@@ -22,7 +22,7 @@ PRIMARY KEY (`pda_id`)/*,*/
 CREATE TABLE `paypal_donation_ipn` (
 `pdi_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Primary ID of row item.',
 `pdi_donation` int(11) NOT NULL DEFAULT '0' COMMENT 'Donation item ID.',
-`pdi_uid` int(11) NOT NULL DEFAULT '0' COMMENT 'User id from e107 users table.',
+`pdi_user` int(11) NOT NULL DEFAULT '0' COMMENT 'User id from e107 users table.',
 `pdi_txn_id` varchar(25) NOT NULL DEFAULT '' COMMENT 'Transaction ID.',
 `pdi_mc_gross` float NOT NULL DEFAULT '0' COMMENT 'Full amount of the customers payment, before transaction fee is subtracted.',
 `pdi_mc_fee` float NOT NULL DEFAULT '0' COMMENT 'Transaction fee associated with the payment.',
@@ -32,5 +32,5 @@ CREATE TABLE `paypal_donation_ipn` (
 `pdi_serialized_ipn` mediumtext NOT NULL COMMENT 'Full post data of IPN as a serialized string.',
 PRIMARY KEY (`pdi_id`)/*,*/
 /* FOREIGN KEY (`pdi_donation`) REFERENCES `paypal_donation`(`pd_id`) */
-/* FOREIGN KEY (`pdi_uid`) REFERENCES `user`(`user_id`) */
+/* FOREIGN KEY (`pdi_user`) REFERENCES `user`(`user_id`) */
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
