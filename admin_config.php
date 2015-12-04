@@ -228,7 +228,7 @@ class paypal_donation_admin_donation_ui extends e_admin_ui
 
 	function init()
 	{
-
+		// Append amount items (unlimited) field to the form.
 	}
 
 	function afterCreate($newdata, $olddata, $id)
