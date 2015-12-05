@@ -6,7 +6,7 @@ CREATE TABLE `paypal_donation` (
 `pd_goal_amount` float NOT NULL DEFAULT '0' COMMENT 'Goal amount for donation item.',
 `pd_goal_date` int(11) NOT NULL DEFAULT '0' COMMENT 'Goal date for donation item.',
 `pd_currency` varchar(25) NOT NULL DEFAULT '' COMMENT 'Currency for donation amount item.',
-`pd_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Status: active or inactive.',
+`pd_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Status active or inactive.',
 PRIMARY KEY (`pd_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
