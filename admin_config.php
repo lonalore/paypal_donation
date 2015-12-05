@@ -39,24 +39,24 @@ class paypal_donation_admin extends e_admin_dispatcher
 	);
 
 	protected $adminMenu = array(
-		'main/prefs'      => array(
-			'caption' => LAN_PAYPAL_DONATION_ADMIN_01,
-			'perm'    => 'P',
-		),
 		'donation/list'   => array(
 			'caption' => LAN_PAYPAL_DONATION_ADMIN_11,
-			'perm'    => 'P',
-		),
-		'donation/create' => array(
-			'caption' => LAN_PAYPAL_DONATION_ADMIN_12,
 			'perm'    => 'P',
 		),
 		'amount/list'     => array(
 			'caption' => LAN_PAYPAL_DONATION_ADMIN_24,
 			'perm'    => 'P',
 		),
+		'donation/create' => array(
+			'caption' => LAN_PAYPAL_DONATION_ADMIN_12,
+			'perm'    => 'P',
+		),
 		'amount/create'   => array(
 			'caption' => LAN_PAYPAL_DONATION_ADMIN_25,
+			'perm'    => 'P',
+		),
+		'main/prefs'      => array(
+			'caption' => LAN_PAYPAL_DONATION_ADMIN_01,
 			'perm'    => 'P',
 		),
 	);
@@ -391,6 +391,11 @@ class paypal_donation_admin_donation_ui extends e_admin_ui
 	 */
 	public function afterDelete($deleted_data, $id, $deleted_check)
 	{
+		if (isset($id) && (int) $id > 0)
+		{
+			$db = e107::getDb();
+			$db->delete('paypal_donation_amount', 'pda_donation = ' . $id);
+		}
 	}
 
 }
