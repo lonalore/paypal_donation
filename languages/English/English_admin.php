@@ -30,7 +30,12 @@ define('LAN_PAYPAL_DONATION_ADMIN_21', 'Goal amount');
 define('LAN_PAYPAL_DONATION_ADMIN_22', 'Goal date');
 define('LAN_PAYPAL_DONATION_ADMIN_23', 'Currency');
 
-define('LAN_PAYPAL_DONATION_ADMIN_24', 'Donation details');
-define('LAN_PAYPAL_DONATION_ADMIN_25', 'Donation amounts');
+define('LAN_PAYPAL_DONATION_ADMIN_24', 'Amount items');
+define('LAN_PAYPAL_DONATION_ADMIN_25', 'Create amount item');
 
-define('LAN_PAYPAL_DONATION_ADMIN_26', 'Amount');
+define('LAN_PAYPAL_DONATION_ADMIN_26', 'Donation item');
+define('LAN_PAYPAL_DONATION_ADMIN_27', 'Amount label');
+define('LAN_PAYPAL_DONATION_ADMIN_28', 'Amount value');
+
+define('LAN_PAYPAL_DONATION_ADMIN_29', '');
+define('LAN_PAYPAL_DONATION_ADMIN_30', '');
