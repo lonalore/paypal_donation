@@ -4,4 +4,4 @@
  * Language file for "paypal_donation" plugin.
  */
 
-define("LAN_PAYDON_FRONT_01", "Settings");
+define("LAN_PAYPAL_DONATION_FRONT_01", "Settings");

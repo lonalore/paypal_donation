@@ -29,3 +29,8 @@ define('LAN_PAYPAL_DONATION_ADMIN_20', 'Allow custom amount?');
 define('LAN_PAYPAL_DONATION_ADMIN_21', 'Goal amount');
 define('LAN_PAYPAL_DONATION_ADMIN_22', 'Goal date');
 define('LAN_PAYPAL_DONATION_ADMIN_23', 'Currency');
+
+define('LAN_PAYPAL_DONATION_ADMIN_24', 'Donation details');
+define('LAN_PAYPAL_DONATION_ADMIN_25', 'Donation amounts');
+
+define('LAN_PAYPAL_DONATION_ADMIN_26', 'Amount');
