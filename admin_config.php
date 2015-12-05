@@ -475,6 +475,7 @@ class paypal_donation_admin_amount_ui extends e_admin_ui
 			'readonly'   => false,
 			'inline'     => false,
 			'filter'     => true,
+			'validate' => true,
 			'writeParms' => array(),
 			'readParms'  => array(),
 			'thclass'    => 'center',
@@ -492,6 +493,8 @@ class paypal_donation_admin_amount_ui extends e_admin_ui
 		'pda_value'    => array(
 			'title'   => LAN_PAYPAL_DONATION_ADMIN_28,
 			'type'    => 'number',
+			'inline'   => true,
+			'validate' => true,
 			'width'   => 'auto',
 			'thclass' => 'center',
 			'class'   => 'center',
@@ -525,16 +528,26 @@ class paypal_donation_admin_amount_ui extends e_admin_ui
 	public function init()
 	{
 		$db = e107::getDb();
-		$db->select('paypal_donation', 'pd_id, pd_title', 'ORDER BY pd_title ASC', true);
+		$db->select('paypal_donation', 'pd_id, pd_title, pd_currency', 'ORDER BY pd_title ASC', true);
 
-		$options = array();
+		$options = array(
+			0 => LAN_PAYPAL_DONATION_ADMIN_31,
+		);
+
 		while($row = $db->fetch())
 		{
-			$options[$row['pd_id']] = $row['pd_title'];
+			$currency = LAN_PAYPAL_DONATION_ADMIN_30 . ' ' . $row['pd_currency'];
+			$options[$row['pd_id']] = $row['pd_title'] . ' (' . $currency . ')';
 		}
 
 		$this->fields['pda_donation']['writeParms'] = $options;
 		$this->fields['pda_donation']['readParms'] = $options;
+
+		if (empty($options) && $this->getAction() == 'create')
+		{
+			$msg = e107::getMessage();
+			$msg->addInfo(LAN_PAYPAL_DONATION_ADMIN_29);
+		}
 	}
 
 	/**

@@ -34,8 +34,10 @@ define('LAN_PAYPAL_DONATION_ADMIN_24', 'Amount items');
 define('LAN_PAYPAL_DONATION_ADMIN_25', 'Create amount item');
 
 define('LAN_PAYPAL_DONATION_ADMIN_26', 'Donation item');
-define('LAN_PAYPAL_DONATION_ADMIN_27', 'Amount label');
-define('LAN_PAYPAL_DONATION_ADMIN_28', 'Amount value');
+define('LAN_PAYPAL_DONATION_ADMIN_27', 'Label for amount item');
+define('LAN_PAYPAL_DONATION_ADMIN_28', 'Value for amount item');
 
-define('LAN_PAYPAL_DONATION_ADMIN_29', '');
-define('LAN_PAYPAL_DONATION_ADMIN_30', '');
+define('LAN_PAYPAL_DONATION_ADMIN_29', 'First you must create a "Donation item"');
+define('LAN_PAYPAL_DONATION_ADMIN_30', 'Currency:');
+
+define('LAN_PAYPAL_DONATION_ADMIN_31', '- Select donation item -');
