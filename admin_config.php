@@ -71,12 +71,23 @@ class paypal_donation_admin extends e_admin_dispatcher
 class paypal_donation_admin_main_ui extends e_admin_ui
 {
 
+	/**
+	 * Could be LAN constant (multi-language support).
+	 *
+	 * @var string plugin name
+	 */
 	protected $pluginTitle = LAN_PLUGIN_PAYPAL_DONATION_NAME;
-	protected $pluginName  = "paypal_donation";
-	protected $preftabs    = array(
+
+	/**
+	 * @var string plugin name
+	 */
+	protected $pluginName = "paypal_donation";
+
+	protected $preftabs = array(
 		LAN_PAYPAL_DONATION_ADMIN_01,
 	);
-	protected $prefs       = array(
+
+	protected $prefs = array(
 		'sandbox_mode'       => array(
 			'title'      => LAN_PAYPAL_DONATION_ADMIN_02,
 			'type'       => 'boolean',
@@ -114,6 +125,18 @@ class paypal_donation_admin_main_ui extends e_admin_ui
 			'writeParms'  => 'label=yesno',
 			'data'        => 'int',
 			'tab'         => 0,
+		),
+		'date_format'        => array(
+			'title'      => LAN_PAYPAL_DONATION_ADMIN_32,
+			'type'       => 'dropdown',
+			'data'       => 'str',
+			'writeParms' => array(
+				'short'    => LAN_PAYPAL_DONATION_ADMIN_33,
+				'long'     => LAN_PAYPAL_DONATION_ADMIN_34,
+				'forum'    => LAN_PAYPAL_DONATION_ADMIN_35,
+				'relative' => LAN_PAYPAL_DONATION_ADMIN_36,
+			),
+			'tab'        => 0,
 		),
 	);
 }
@@ -160,10 +183,12 @@ class paypal_donation_admin_donation_ui extends e_admin_ui
 	 */
 	protected $batchDelete = true;
 
+	protected $sortField = 'pd_weight';
+
 	/**
 	 * @var string SQL order, false to disable order, null is default order
 	 */
-	protected $listOrder = "pd_title ASC";
+	protected $listOrder = "pd_weight ASC";
 
 	/**
 	 * @var array UI field data
@@ -195,15 +220,6 @@ class paypal_donation_admin_donation_ui extends e_admin_ui
 			'readonly' => false,
 			'validate' => true,
 		),
-		'pd_description'   => array(
-			'title'     => LAN_PAYPAL_DONATION_ADMIN_15,
-			'type'      => 'textarea',
-			'inline'    => true,
-			'width'     => 'auto',
-			'thclass'   => 'left',
-			'readParms' => 'expand=...&truncate=150&bb=1',
-			'readonly'  => false,
-		),
 		'pd_custom_amount' => array(
 			'title'      => LAN_PAYPAL_DONATION_ADMIN_20,
 			'type'       => 'boolean',
@@ -217,14 +233,16 @@ class paypal_donation_admin_donation_ui extends e_admin_ui
 			'width'   => 'auto',
 			'thclass' => 'center',
 			'class'   => 'center',
+			'format' => '%Y-%m-%d %H:%M',
 		),
 		'pd_goal_amount'   => array(
-			'title'   => LAN_PAYPAL_DONATION_ADMIN_21,
-			'type'    => 'number',
-			'inline'  => true,
-			'width'   => 'auto',
-			'thclass' => 'center',
-			'class'   => 'center',
+			'title'    => LAN_PAYPAL_DONATION_ADMIN_21,
+			'type'     => 'number',
+			'inline'   => true,
+			'validate' => true,
+			'width'    => 'auto',
+			'thclass'  => 'center',
+			'class'    => 'center',
 		),
 		'pd_currency'      => array(
 			'title'      => LAN_PAYPAL_DONATION_ADMIN_23,
@@ -303,6 +321,15 @@ class paypal_donation_admin_donation_ui extends e_admin_ui
 			'thclass'    => 'center',
 			'class'      => 'center',
 		),
+		'pd_description'   => array(
+			'title'     => LAN_PAYPAL_DONATION_ADMIN_15,
+			'type'      => 'bbarea',
+			'inline'    => true,
+			'width'     => 'auto',
+			'thclass'   => 'left',
+			'readParms' => 'expand=...&truncate=150&bb=1',
+			'readonly'  => false,
+		),
 		'options'          => array(
 			'title'   => LAN_PAYPAL_DONATION_ADMIN_19,
 			'type'    => null,
@@ -320,7 +347,7 @@ class paypal_donation_admin_donation_ui extends e_admin_ui
 	protected $fieldpref = array(
 		'checkboxes',
 		'pd_title',
-		'pd_description',
+		// 'pd_description',
 		'pd_goal_amount',
 		'pd_currency',
 		'pd_goal_date',
@@ -391,7 +418,7 @@ class paypal_donation_admin_donation_ui extends e_admin_ui
 	 */
 	public function afterDelete($deleted_data, $id, $deleted_check)
 	{
-		if (isset($id) && (int) $id > 0)
+		if(isset($id) && (int) $id > 0)
 		{
 			$db = e107::getDb();
 			$db->delete('paypal_donation_amount', 'pda_donation = ' . $id);
@@ -442,10 +469,12 @@ class paypal_donation_admin_amount_ui extends e_admin_ui
 	 */
 	protected $batchDelete = false;
 
+	protected $sortField = 'pda_weight';
+
 	/**
 	 * @var string SQL order, false to disable order, null is default order
 	 */
-	protected $listOrder = "title ASC";
+	protected $listOrder = "pda_weight ASC";
 
 	/**
 	 * @var array UI field data
@@ -473,9 +502,9 @@ class paypal_donation_admin_amount_ui extends e_admin_ui
 			'type'       => 'dropdown',
 			'width'      => 'auto',
 			'readonly'   => false,
-			'inline'     => false,
+			'inline'     => true,
 			'filter'     => true,
-			'validate' => true,
+			'validate'   => true,
 			'writeParms' => array(),
 			'readParms'  => array(),
 			'thclass'    => 'center',
@@ -491,13 +520,13 @@ class paypal_donation_admin_amount_ui extends e_admin_ui
 			'validate' => true,
 		),
 		'pda_value'    => array(
-			'title'   => LAN_PAYPAL_DONATION_ADMIN_28,
-			'type'    => 'number',
+			'title'    => LAN_PAYPAL_DONATION_ADMIN_28,
+			'type'     => 'number',
 			'inline'   => true,
 			'validate' => true,
-			'width'   => 'auto',
-			'thclass' => 'center',
-			'class'   => 'center',
+			'width'    => 'auto',
+			'thclass'  => 'center',
+			'class'    => 'center',
 		),
 		'options'      => array(
 			'title'   => LAN_PAYPAL_DONATION_ADMIN_19,
@@ -543,7 +572,7 @@ class paypal_donation_admin_amount_ui extends e_admin_ui
 		$this->fields['pda_donation']['writeParms'] = $options;
 		$this->fields['pda_donation']['readParms'] = $options;
 
-		if (empty($options) && $this->getAction() == 'create')
+		if(empty($options) && $this->getAction() == 'create')
 		{
 			$msg = e107::getMessage();
 			$msg->addInfo(LAN_PAYPAL_DONATION_ADMIN_29);

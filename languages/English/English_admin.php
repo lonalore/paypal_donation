@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Language file for "paypal_donation" plugin.
@@ -15,8 +16,8 @@ define("LAN_PAYPAL_DONATION_ADMIN_08", "Validate Primary Email Address on IPN me
 define("LAN_PAYPAL_DONATION_ADMIN_09", "Logging failed IPNs");
 define("LAN_PAYPAL_DONATION_ADMIN_10", "Logging failed IPNs using system logs.");
 
-define('LAN_PAYPAL_DONATION_ADMIN_11', 'Donation items');
-define('LAN_PAYPAL_DONATION_ADMIN_12', 'Create donation item');
+define('LAN_PAYPAL_DONATION_ADMIN_11', 'Menu items');
+define('LAN_PAYPAL_DONATION_ADMIN_12', 'Create menu item');
 
 define('LAN_PAYPAL_DONATION_ADMIN_13', 'ID');
 define('LAN_PAYPAL_DONATION_ADMIN_14', 'Title');
@@ -30,14 +31,20 @@ define('LAN_PAYPAL_DONATION_ADMIN_21', 'Goal amount');
 define('LAN_PAYPAL_DONATION_ADMIN_22', 'Goal date');
 define('LAN_PAYPAL_DONATION_ADMIN_23', 'Currency');
 
-define('LAN_PAYPAL_DONATION_ADMIN_24', 'Amount items');
-define('LAN_PAYPAL_DONATION_ADMIN_25', 'Create amount item');
+define('LAN_PAYPAL_DONATION_ADMIN_24', 'Amounts');
+define('LAN_PAYPAL_DONATION_ADMIN_25', 'Create amount');
 
-define('LAN_PAYPAL_DONATION_ADMIN_26', 'Donation item');
-define('LAN_PAYPAL_DONATION_ADMIN_27', 'Label for amount item');
-define('LAN_PAYPAL_DONATION_ADMIN_28', 'Value for amount item');
+define('LAN_PAYPAL_DONATION_ADMIN_26', 'Menu item');
+define('LAN_PAYPAL_DONATION_ADMIN_27', 'Label for amount');
+define('LAN_PAYPAL_DONATION_ADMIN_28', 'Value for amount');
 
-define('LAN_PAYPAL_DONATION_ADMIN_29', 'First you must create a "Donation item"');
+define('LAN_PAYPAL_DONATION_ADMIN_29', 'First you must create a "Menu item"');
 define('LAN_PAYPAL_DONATION_ADMIN_30', 'Currency:');
 
-define('LAN_PAYPAL_DONATION_ADMIN_31', '- Select donation item -');
+define('LAN_PAYPAL_DONATION_ADMIN_31', '- Select menu item -');
+
+define('LAN_PAYPAL_DONATION_ADMIN_32', 'Date format');
+define('LAN_PAYPAL_DONATION_ADMIN_33', 'Short date format');
+define('LAN_PAYPAL_DONATION_ADMIN_34', 'Long date format');
+define('LAN_PAYPAL_DONATION_ADMIN_35', 'Forum date format');
+define('LAN_PAYPAL_DONATION_ADMIN_36', 'Relative date format');

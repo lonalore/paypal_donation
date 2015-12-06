@@ -1,0 +1,43 @@
+.paypal-donation-menu-item {
+    margin-bottom: 15px;
+}
+
+.paypal-donation-menu-item .donation-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #959595;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px dashed #959595;
+    margin-bottom: 10px;
+}
+
+.paypal-donation-menu-item .donation-description p,
+.paypal-donation-menu-item .donation-description blockquote {
+    font-size: 14px;
+}
+
+.paypal-donation-menu-item .raised-amount {
+    font-weight: bold;
+    font-size: 26px;
+    line-height: 12px;
+}
+
+.paypal-donation-menu-item .raised-amount span.glyphicon {
+    font-weight: normal;
+    font-size: 18px;
+}
+
+.paypal-donation-menu-item .raised-amount span.currency {
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.paypal-donation-menu-item .progress-container {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.paypal-donation-menu-item .progress-container .progress {
+    margin-bottom: 0;
+}
