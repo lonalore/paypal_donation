@@ -42,7 +42,10 @@ class paypal_donation_menu
 
 		if(vartrue($_POST['donation'], false))
 		{
-			$this->formSubmit();
+			if($this->formValidate())
+			{
+				$this->formSubmit();
+			}
 		}
 
 		// Render menu.
@@ -148,21 +151,32 @@ class paypal_donation_menu
 	 */
 	function formValidate()
 	{
+		$msg = e107::getMessage();
+
 		$pd_id = (int) vartrue($_POST['donation_item'], 0);
 		$amount = vartrue($_POST['amount'], false);
 
-		if($pd_id === 0 || $amount === false)
+		if($pd_id === 0)
 		{
+			$msg->addError(LAN_PAYPAL_DONATION_FRONT_16);
+			return false;
+		}
+
+		if($amount === false)
+		{
+			$msg->addError(LAN_PAYPAL_DONATION_FRONT_17);
 			return false;
 		}
 
 		if($amount != 'custom' && (float) $amount == 0)
 		{
+			$msg->addError(LAN_PAYPAL_DONATION_FRONT_17);
 			return false;
 		}
 
 		if($amount == 'custom' && (float) $_POST['custom_amount'] == 0)
 		{
+			$msg->addError(LAN_PAYPAL_DONATION_FRONT_18);
 			return false;
 		}
 
@@ -177,6 +191,7 @@ class paypal_donation_menu
 
 		if(!$item)
 		{
+			$msg->addError(LAN_PAYPAL_DONATION_FRONT_19);
 			return false;
 		}
 
@@ -188,8 +203,10 @@ class paypal_donation_menu
 	 */
 	function formSubmit()
 	{
+		$pd_id = (int) vartrue($_POST['donation_item'], 0);
+
 		$db = e107::getDb();
-		$db->select('paypal_donation', '*', 'pd_id = ' . (int) vartrue($_POST['donation_item'], 0));
+		$db->select('paypal_donation', '*', 'pd_id = ' . $pd_id);
 
 		$item = false;
 		while($row = $db->fetch())
@@ -203,10 +220,12 @@ class paypal_donation_menu
 
 		if((int) $this->plugPrefs['sandbox_mode'] === 0)
 		{
+			$url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
 			$business = $this->plugPrefs['email_sandbox'];
 		}
 		else
 		{
+			$url = 'https://www.paypal.com/cgi-bin/webscr';
 			$business = $this->plugPrefs['email_live'];
 		}
 
@@ -216,6 +235,7 @@ class paypal_donation_menu
 		$params['notify_url'] = SITEURLBASE . e_PLUGIN_ABS . 'paypal_donation/ipn_listener.php';
 		// The return page to which the user is navigated after the donations is complete:
 		$params['return'] = e_SELF;
+		$params['cancel_return'] = e_SELF;
 		// Signifies that the transaction data will be passed to the return page by POST:
 		$params['rm'] = 2;
 
@@ -227,6 +247,14 @@ class paypal_donation_menu
 		$params['currency_code'] = $item['pd_currency'];
 		$params['amount'] = ($_POST['amount'] == 'custom' ? $_POST['custom_amount'] : $_POST['amount']);
 		$params['bn'] = 'PP-DonationsBF:btn_donate_LG.gif:NonHostedGuest';
+
+		$params['custom'] = $pd_id . '|' . USERID;
+
+		$query = e107::httpBuildQuery($params);
+		$goto = $url . '?' . $query;
+
+		header('Location: ' . $goto);
+		exit;
 	}
 
 }

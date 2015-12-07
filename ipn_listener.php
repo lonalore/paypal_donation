@@ -143,24 +143,115 @@ class ipn_listener
 
 	/**
 	 * Process IPN data:
-	 * - Check whether the payment_status is Completed.
-	 * - Check that txn_id has not been previously processed.
-	 * - Check that receiver_email is your Primary PayPal email.
-	 * - Check that payment_amount/payment_currency are correct.
-	 * - Process the notification.
+	 * - Done: Check whether the payment_status is Completed.
+	 * - Done: Check that txn_id has not been previously processed.
+	 * - Done: Check that receiver_email is your Primary PayPal email.
+	 * - Done: Check that the "custom" value is a valid menu item.
+	 * - Done: Process the notification.
 	 */
 	private function processIPN()
 	{
-		/*
-		$item_name = $_POST['item_name'];
-		$item_number = $_POST['item_number'];
-		$payment_status = $_POST['payment_status'];
-		$payment_amount = $_POST['mc_gross'];
-		$payment_currency = $_POST['mc_currency'];
-		$txn_id = $_POST['txn_id'];
-		$receiver_email = $_POST['receiver_email'];
-		$payer_email = $_POST['payer_email'];
-		*/
+		$log = e107::getLog();
+		$db = e107::getDb();
+		$tp = e107::getParser();
+
+		$logging = (bool) $this->plugPrefs['logging_failed_ipn'];
+		$validate_email = (bool) $this->plugPrefs['validate_email'];
+
+		// Check whether the payment_status is Completed.
+		$payment_status = vartrue($_POST['payment_status']);
+
+		if(strtoupper($payment_status) != 'COMPLETED')
+		{
+			if($logging)
+			{
+				$log->add('Process IPN', $_POST, E_LOG_INFORMATIVE, 'IPN');
+			}
+			exit;
+		}
+
+		// Check that txn_id has not been previously processed.
+		$txn_id = vartrue($_POST['txn_id'], 0);
+		$exists = $db->count('paypal_donation_ipn', 'pdi_txn_id', 'pdi_txn_id = "' . $tp->toDB($txn_id) . '" ');
+
+		if($exists > 0)
+		{
+			if($logging)
+			{
+				$log->add('Process IPN', $_POST, E_LOG_INFORMATIVE, 'IPN');
+			}
+			exit;
+		}
+
+		// Check that receiver_email is your Primary PayPal email.
+		if($validate_email)
+		{
+			$receiver_email = vartrue($_POST['receiver_email']);
+
+			if((int) $this->plugPrefs['sandbox_mode'] === 0)
+			{
+				$business = $this->plugPrefs['email_sandbox'];
+			}
+			else
+			{
+				$business = $this->plugPrefs['email_live'];
+			}
+
+			if($receiver_email != $business)
+			{
+				if($logging)
+				{
+					$log->add('Process IPN', $_POST, E_LOG_INFORMATIVE, 'IPN');
+				}
+				exit;
+			}
+		}
+
+		// Check that the "custom" value is a valid menu item.
+		$custom = vartrue($_POST['custom'], '');
+		$segments = explode('|', $custom);
+
+		$pd_id = (int) $segments[0];
+		$exists = $db->count('paypal_donation', 'pdi_txn_id', 'pd_id = ' . $pd_id . ' ');
+
+		if($exists == 0)
+		{
+			if($logging)
+			{
+				$log->add('Process IPN', $_POST, E_LOG_INFORMATIVE, 'IPN');
+			}
+			exit;
+		}
+
+		$pdi_user = vartrue($segments[1], 0);
+		$pdi_mc_gross = vartrue($_POST['mc_gross'], 0);
+		$pdi_mc_fee = vartrue($_POST['mc_fee'], 0);
+		$pdi_mc_currency = vartrue($_POST['mc_currency'], '');
+		$pdi_payment_date = vartrue($_POST['payment_date'], '');
+		$pdi_serialized_ipn = serialize($_POST);
+
+		// Process IPN.
+		$data = array(
+			'pdi_donation'       => (int) $pd_id,
+			'pdi_user'           => (int) $pdi_user,
+			'pdi_txn_id'         => $tp->toDB($txn_id),
+			'pdi_mc_gross'       => (float) $pdi_mc_gross,
+			'pdi_mc_fee'         => (float) $pdi_mc_fee,
+			'pdi_mc_currency'    => $tp->toDB($pdi_mc_currency),
+			'pdi_payment_date'   => strtotime($pdi_payment_date),
+			'pdi_cancelled'      => 0,
+			'pdi_serialized_ipn' => $pdi_serialized_ipn,
+		);
+
+		$id = $db->insert('paypal_donation_ipn', $data);
+
+		if($id)
+		{
+			$event = e107::getEvent();
+			$event->trigger('paypal-donation-ipn-insert', $id);
+		}
+
+		exit;
 	}
 
 }

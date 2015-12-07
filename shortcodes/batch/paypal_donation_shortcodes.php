@@ -182,6 +182,9 @@ class paypal_donation_shortcodes extends e_shortcode
 		if((int) $menuItem['pd_custom_amount'] == 1 || !empty($amounts))
 		{
 			$form = e107::getForm();
+			$msgs = e107::getMessage();
+
+			$html .= $msgs->render();
 
 			$html .= $form->open('paypal-donation-form', 'post', e_SELF, array(
 				'class' => 'paypal-donation-form',
