@@ -145,7 +145,7 @@ class paypal_donation_shortcodes extends e_shortcode
 
 		$left = '';
 
-		if(isset($goalDate) && $goalDate > 0)
+		if((int) $goalDate > 0)
 		{
 			$diff = $goalDate - $now;
 
@@ -174,7 +174,56 @@ class paypal_donation_shortcodes extends e_shortcode
 
 	function sc_donation_form()
 	{
+		$menuItem = $this->var['menu_item'];
+		$amounts = $this->var['amounts'];
 
+		$html = '';
+
+		if((int) $menuItem['pd_custom_amount'] == 1 || !empty($amounts))
+		{
+			$form = e107::getForm();
+
+			$html .= $form->open('paypal-donation-form', 'post', e_SELF, array(
+				'class' => 'paypal-donation-form',
+			));
+			$html .= '<div class="form-group">';
+			$html .= '<label>' . LAN_PAYPAL_DONATION_FRONT_14 . '</label>';
+
+			foreach($amounts as $key => $amount)
+			{
+				$first = ($key == 0 ? ' first' : '');
+				$html .= '<div class="radio' . $first . '">';
+				$html .= '<label>';
+				$html .= $form->radio('amount', $amount['pda_value']);
+				$html .= $amount['pda_label'];
+				$html .= '</label>';
+				$html .= '</div>';
+			}
+
+			if((int) $menuItem['pd_custom_amount'] == 1)
+			{
+				$html .= '<div class="radio">';
+				$html .= '<label>';
+				$html .= $form->radio('amount', 'custom');
+				$html .= $form->text('custom_amount', '', 80, array(
+					'class'       => 'input-sm',
+					'placeholder' => LAN_PAYPAL_DONATION_FRONT_12,
+				));
+				$html .= '</label>';
+				$html .= '</div>';
+			}
+
+			$html .= '</div>';
+			$html .= '<div class="form-group actions text-center">';
+			$html .= $form->hidden('donation', 1);
+			$html .= $form->hidden('donation_item', $menuItem['pd_id']);
+			$html .= $form->submit('submit', LAN_PAYPAL_DONATION_FRONT_13);
+			$html .= '</div>';
+
+			$html .= $form->close();
+		}
+
+		return $html;
 	}
 
 }

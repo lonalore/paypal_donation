@@ -37,17 +37,20 @@ class paypal_donation_menu
 	 */
 	function __construct()
 	{
-		if(USER)
+		// Get plugin preferences.
+		$this->plugPrefs = e107::getPlugConfig('paypal_donation')->getPref();
+
+		if(vartrue($_POST['donation'], false))
 		{
-			// Get plugin preferences.
-			$this->plugPrefs = e107::getPlugConfig('paypal_donation')->getPref();
-			// Render menu.
-			$this->renderMenu();
+			$this->formSubmit();
 		}
+
+		// Render menu.
+		$this->renderMenu();
 	}
 
 	/**
-	 *
+	 * Render menu contents.
 	 */
 	function renderMenu()
 	{
@@ -77,7 +80,7 @@ class paypal_donation_menu
 	}
 
 	/**
-	 *
+	 * Get available amounts for donation form.
 	 */
 	function getAmounts($pd_id = 0)
 	{
@@ -100,7 +103,7 @@ class paypal_donation_menu
 	}
 
 	/**
-	 *
+	 * Get raised amount for a donation menu item.
 	 */
 	function getRaised($pd_id = 0)
 	{
@@ -126,7 +129,7 @@ class paypal_donation_menu
 
 			$ipn = unserialize($row['pdi_serialized_ipn']);
 
-			if(isset($ipn['payer_id']))
+			if(vartrue($ipn['payer_id']))
 			{
 				if(!in_array($ipn['payer_id'], $payers))
 				{
@@ -138,6 +141,92 @@ class paypal_donation_menu
 		$raised['by'] = count($payers);
 
 		return $raised;
+	}
+
+	/**
+	 * Validate submitted donation form.
+	 */
+	function formValidate()
+	{
+		$pd_id = (int) vartrue($_POST['donation_item'], 0);
+		$amount = vartrue($_POST['amount'], false);
+
+		if($pd_id === 0 || $amount === false)
+		{
+			return false;
+		}
+
+		if($amount != 'custom' && (float) $amount == 0)
+		{
+			return false;
+		}
+
+		if($amount == 'custom' && (float) $_POST['custom_amount'] == 0)
+		{
+			return false;
+		}
+
+		$db = e107::getDb();
+		$db->select('paypal_donation', '*', 'pd_id = ' . $pd_id);
+
+		$item = false;
+		while($row = $db->fetch())
+		{
+			$item = $row;
+		}
+
+		if(!$item)
+		{
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Process submitted donation form.
+	 */
+	function formSubmit()
+	{
+		$db = e107::getDb();
+		$db->select('paypal_donation', '*', 'pd_id = ' . (int) vartrue($_POST['donation_item'], 0));
+
+		$item = false;
+		while($row = $db->fetch())
+		{
+			$item = $row;
+		}
+
+		$params = array();
+		$params['cmd'] = '_donations';
+		$params['item_name'] = $item['pd_title'];
+
+		if((int) $this->plugPrefs['sandbox_mode'] === 0)
+		{
+			$business = $this->plugPrefs['email_sandbox'];
+		}
+		else
+		{
+			$business = $this->plugPrefs['email_live'];
+		}
+
+		// PayPal email:
+		$params['business'] = $business;
+		// PayPal will send an IPN notification to this URL:
+		$params['notify_url'] = SITEURLBASE . e_PLUGIN_ABS . 'paypal_donation/ipn_listener.php';
+		// The return page to which the user is navigated after the donations is complete:
+		$params['return'] = e_SELF;
+		// Signifies that the transaction data will be passed to the return page by POST:
+		$params['rm'] = 2;
+
+		// General configuration variables for the PayPal landing page.
+		$params['no_note'] = 1;
+		$params['cbt'] = LAN_PAYPAL_DONATION_FRONT_15; // Go Back To The Site
+		$params['no_shipping'] = 1;
+		$params['lc'] = 'US';
+		$params['currency_code'] = $item['pd_currency'];
+		$params['amount'] = ($_POST['amount'] == 'custom' ? $_POST['custom_amount'] : $_POST['amount']);
+		$params['bn'] = 'PP-DonationsBF:btn_donate_LG.gif:NonHostedGuest';
 	}
 
 }

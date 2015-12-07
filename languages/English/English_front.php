@@ -15,3 +15,8 @@ define("LAN_PAYPAL_DONATION_FRONT_07", "day");
 define("LAN_PAYPAL_DONATION_FRONT_08", "days");
 define("LAN_PAYPAL_DONATION_FRONT_09", "left");
 define("LAN_PAYPAL_DONATION_FRONT_10", "until");
+define("LAN_PAYPAL_DONATION_FRONT_11", "Donate");
+define("LAN_PAYPAL_DONATION_FRONT_12", "custom");
+define("LAN_PAYPAL_DONATION_FRONT_13", "Make a donation");
+define("LAN_PAYPAL_DONATION_FRONT_14", "Donation amount");
+define("LAN_PAYPAL_DONATION_FRONT_15", "Go Back To The Site");

@@ -41,3 +41,11 @@
 .paypal-donation-menu-item .progress-container .progress {
     margin-bottom: 0;
 }
+
+.paypal-donation-menu-item .paypal-donation-form {
+    margin-top: 15px;
+}
+
+.paypal-donation-menu-item .paypal-donation-form .radio.first {
+    margin-top: 0;
+}
