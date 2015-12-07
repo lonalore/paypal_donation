@@ -109,7 +109,16 @@ class ipn_listener
 	{
 		if($req)
 		{
-			$ch = curl_init('https://www.paypal.com/cgi-bin/webscr');
+			if((int) $this->plugPrefs['sandbox_mode'] === 1)
+			{
+				$url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
+			}
+			else
+			{
+				$url = 'https://www.paypal.com/cgi-bin/webscr';
+			}
+
+			$ch = curl_init($url);
 			curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
 			curl_setopt($ch, CURLOPT_POST, 1);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -165,20 +174,20 @@ class ipn_listener
 		{
 			if($logging)
 			{
-				$log->add('Process IPN', $_POST, E_LOG_INFORMATIVE, 'IPN');
+				$log->add('Status is not completed', $_POST, E_LOG_INFORMATIVE, 'IPN');
 			}
 			exit;
 		}
 
 		// Check that txn_id has not been previously processed.
 		$txn_id = vartrue($_POST['txn_id'], 0);
-		$exists = $db->count('paypal_donation_ipn', 'pdi_txn_id', 'pdi_txn_id = "' . $tp->toDB($txn_id) . '" ');
+		$exists = $db->count('paypal_donation_ipn', '(*)', 'pdi_txn_id = "' . $tp->toDB($txn_id) . '" ');
 
 		if($exists > 0)
 		{
 			if($logging)
 			{
-				$log->add('Process IPN', $_POST, E_LOG_INFORMATIVE, 'IPN');
+				$log->add('Existing TXN ID', $_POST, E_LOG_INFORMATIVE, 'IPN');
 			}
 			exit;
 		}
@@ -188,7 +197,7 @@ class ipn_listener
 		{
 			$receiver_email = vartrue($_POST['receiver_email']);
 
-			if((int) $this->plugPrefs['sandbox_mode'] === 0)
+			if((int) $this->plugPrefs['sandbox_mode'] === 1)
 			{
 				$business = $this->plugPrefs['email_sandbox'];
 			}
@@ -201,7 +210,7 @@ class ipn_listener
 			{
 				if($logging)
 				{
-					$log->add('Process IPN', $_POST, E_LOG_INFORMATIVE, 'IPN');
+					$log->add('Invalid receiver email', $_POST, E_LOG_INFORMATIVE, 'IPN');
 				}
 				exit;
 			}
@@ -212,13 +221,19 @@ class ipn_listener
 		$segments = explode('|', $custom);
 
 		$pd_id = (int) $segments[0];
-		$exists = $db->count('paypal_donation', 'pdi_txn_id', 'pd_id = ' . $pd_id . ' ');
+		$exists = $db->count('paypal_donation', '(*)', 'pd_id = ' . $pd_id . ' ');
 
 		if($exists == 0)
 		{
 			if($logging)
 			{
-				$log->add('Process IPN', $_POST, E_LOG_INFORMATIVE, 'IPN');
+				$data = array(
+					'POST'     => $_POST,
+					'SEGMENTS' => $segments,
+					'PD_ID'    => $pd_id,
+				);
+
+				$log->add('Invalid menu item', $data, E_LOG_INFORMATIVE, 'IPN');
 			}
 			exit;
 		}
@@ -249,9 +264,16 @@ class ipn_listener
 		{
 			$event = e107::getEvent();
 			$event->trigger('paypal-donation-ipn-insert', $id);
+			exit;
 		}
-
-		exit;
+		else
+		{
+			if($logging)
+			{
+				$log->add('SQL Insert', $_POST, E_LOG_INFORMATIVE, 'IPN');
+			}
+			exit;
+		}
 	}
 
 }

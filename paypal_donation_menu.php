@@ -218,7 +218,7 @@ class paypal_donation_menu
 		$params['cmd'] = '_donations';
 		$params['item_name'] = $item['pd_title'];
 
-		if((int) $this->plugPrefs['sandbox_mode'] === 0)
+		if((int) $this->plugPrefs['sandbox_mode'] === 1)
 		{
 			$url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
 			$business = $this->plugPrefs['email_sandbox'];

@@ -95,8 +95,8 @@ class paypal_donation_shortcodes extends e_shortcode
 	{
 		$raised = (float) $this->var['raised']['amount'];
 		$goal = (float) $this->var['menu_item']['pd_goal_amount'];
-		$percent = $goal / 100 * $raised;
-		$formatted = number_format($percent, 0);
+		$percent = $raised / ($goal / 100);
+		$formatted = number_format($percent, 0, '.', '');
 		return $formatted;
 	}
 
@@ -104,7 +104,7 @@ class paypal_donation_shortcodes extends e_shortcode
 	{
 		$raised = (float) $this->var['raised']['amount'];
 		$goal = (float) $this->var['menu_item']['pd_goal_amount'];
-		$percent = $goal / 100 * $raised;
+		$percent = $raised / ($goal / 100);
 		$formatted = number_format($percent, 0);
 		$text = str_replace('[x]', '<strong>' . $formatted . '%</strong>', LAN_PAYPAL_DONATION_FRONT_05);
 		return $text;
