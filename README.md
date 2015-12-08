@@ -16,7 +16,6 @@ Requirements:
 > - Email donors customized email Thank You message.
 > - Implements e_notify.php
 > - Assign userclass to donor (user) automatically
-> - Using Ajax forms for menu-items
 > - NodeJS integration: real-time menu-items updates with push-notifications
 
 ### Questions about this project?
