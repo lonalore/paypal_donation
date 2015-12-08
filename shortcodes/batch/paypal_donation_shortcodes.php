@@ -10,6 +10,9 @@ if(!defined('e107_INIT'))
 	exit;
 }
 
+// [PLUGINS]/paypal_donation/languages/[LANGUAGE]/[LANGUAGE]_front.php
+e107::lan('paypal_donation', false, true);
+
 
 /**
  * Class paypal_donation_shortcodes.
