@@ -8,6 +8,9 @@ CREATE TABLE `paypal_donation` (
 `pd_currency` varchar(25) NOT NULL DEFAULT '' COMMENT 'Currency for amounts.',
 `pd_status` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'Status active or inactive.',
 `pd_weight` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT 'Weight for ordering.',
+`pd_visibility` varchar(10) NOT NULL DEFAULT '' COMMENT 'Users who can view menu item.',
+`pd_donate` varchar(10) NOT NULL DEFAULT '' COMMENT 'Users who can donate.',
+`pd_language` varchar(25) NOT NULL DEFAULT '' COMMENT 'Language code to define PayPal language.',
 PRIMARY KEY (`pd_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

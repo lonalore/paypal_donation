@@ -179,6 +179,11 @@ class paypal_donation_shortcodes extends e_shortcode
 
 		$html = '';
 
+		if(check_class($menuItem['pd_donate']) === false)
+		{
+			return $html;
+		}
+
 		if((int) $menuItem['pd_custom_amount'] == 1 || !empty($amounts))
 		{
 			$form = e107::getForm();

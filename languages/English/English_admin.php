@@ -48,3 +48,42 @@ define('LAN_PAYPAL_DONATION_ADMIN_33', 'Short date format');
 define('LAN_PAYPAL_DONATION_ADMIN_34', 'Long date format');
 define('LAN_PAYPAL_DONATION_ADMIN_35', 'Forum date format');
 define('LAN_PAYPAL_DONATION_ADMIN_36', 'Relative date format');
+
+define('LAN_PAYPAL_DONATION_ADMIN_37', 'Users who can view menu item');
+define('LAN_PAYPAL_DONATION_ADMIN_38', 'Users who can donate');
+define('LAN_PAYPAL_DONATION_ADMIN_39', 'PayPal login page language / locale');
+
+define('LAN_PAYPAL_DONATION_ADMIN_40', '');
+define('LAN_PAYPAL_DONATION_ADMIN_41', '');
+
+define('LAN_PAYPAL_DONATION_ADMIN_42', 'By country: Australia');
+define('LAN_PAYPAL_DONATION_ADMIN_43', 'By country: Austria');
+define('LAN_PAYPAL_DONATION_ADMIN_44', 'By country: Belgium');
+define('LAN_PAYPAL_DONATION_ADMIN_45', 'By country: Brazil');
+define('LAN_PAYPAL_DONATION_ADMIN_46', 'By country: Canada');
+define('LAN_PAYPAL_DONATION_ADMIN_47', 'By country: China');
+define('LAN_PAYPAL_DONATION_ADMIN_48', 'By country: France');
+define('LAN_PAYPAL_DONATION_ADMIN_49', 'By country: Germany');
+define('LAN_PAYPAL_DONATION_ADMIN_50', 'By country: Italy');
+define('LAN_PAYPAL_DONATION_ADMIN_51', 'By country: Netherlands');
+define('LAN_PAYPAL_DONATION_ADMIN_52', 'By country: Poland');
+define('LAN_PAYPAL_DONATION_ADMIN_53', 'By country: Portugal');
+define('LAN_PAYPAL_DONATION_ADMIN_54', 'By country: Russia');
+define('LAN_PAYPAL_DONATION_ADMIN_55', 'By country: Spain');
+define('LAN_PAYPAL_DONATION_ADMIN_56', 'By country: Switzerland');
+define('LAN_PAYPAL_DONATION_ADMIN_57', 'By country: United Kingdom');
+define('LAN_PAYPAL_DONATION_ADMIN_58', 'By country: United States');
+
+define('LAN_PAYPAL_DONATION_ADMIN_59', 'By language: Danish (for Denmark only)');
+define('LAN_PAYPAL_DONATION_ADMIN_60', 'By language: Hebrew (for all)');
+define('LAN_PAYPAL_DONATION_ADMIN_61', 'By language: Indonesian (for Indonesia only)');
+define('LAN_PAYPAL_DONATION_ADMIN_62', 'By language: Japanese (for Japan only)');
+define('LAN_PAYPAL_DONATION_ADMIN_63', 'By language: Norwegian (for Norway only)');
+define('LAN_PAYPAL_DONATION_ADMIN_64', 'By language: Brazilian Portuguese (for Portugal and Brazil only)');
+define('LAN_PAYPAL_DONATION_ADMIN_65', 'By language: Russian (for Lithuania, Latvia, and Ukraine only)');
+define('LAN_PAYPAL_DONATION_ADMIN_66', 'By language: Swedish (for Sweden only)');
+define('LAN_PAYPAL_DONATION_ADMIN_67', 'By language: Thai (for Thailand only)');
+define('LAN_PAYPAL_DONATION_ADMIN_68', 'By language: Turkish (for Turkey only)');
+define('LAN_PAYPAL_DONATION_ADMIN_69', 'By language: Simplified Chinese (for China only)');
+define('LAN_PAYPAL_DONATION_ADMIN_70', 'By language: Traditional Chinese (for Hong Kong only)');
+define('LAN_PAYPAL_DONATION_ADMIN_71', 'By language: Traditional Chinese (for Taiwan only)');

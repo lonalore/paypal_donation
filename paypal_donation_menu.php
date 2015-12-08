@@ -68,14 +68,17 @@ class paypal_donation_menu
 
 		while($row = $db->fetch())
 		{
-			$item = array(
-				'menu_item' => $row,
-				'amounts'   => $this->getAmounts($row['pd_id']),
-				'raised'    => $this->getRaised($row['pd_id']),
-			);
+			if(check_class($row['pd_visibility']) === true)
+			{
+				$item = array(
+					'menu_item' => $row,
+					'amounts'   => $this->getAmounts($row['pd_id']),
+					'raised'    => $this->getRaised($row['pd_id']),
+				);
 
-			$sc->setVars($item);
-			$text .= $tp->parseTemplate($template['MENU'], true, $sc);
+				$sc->setVars($item);
+				$text .= $tp->parseTemplate($template['MENU'], true, $sc);
+			}
 		}
 
 		e107::getRender()->tablerender(LAN_PAYPAL_DONATION_FRONT_01, $text);
