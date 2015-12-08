@@ -9,14 +9,14 @@ Requirements:
 > - Ability to create unlimited donation-campaigns (menu items) **[DONE]**
 > - Ability to define goals (goal amount and date) **[DONE]**
 > - Ability to add pre-defined amounts and/or "custom amount" field for donation forms **[DONE]**
-> - Access management **[DONE]**
+> - Access management for menu items **[DONE]**
 > - Track Donations (and Donors), store PayPal IPN messages **[DONE]**
-> - Goal tracking (in menu item) **[DONE]**
+> - Goal tracking (per menu item) **[DONE]**
 > - Reporting features to Admin UI (lists, charts, exports, etc)
 > - Email donors customized email Thank You message.
 > - Implements e_notify.php
+> - Assign userclass to donor (user) automatically
 > - NodeJS integration: real-time menu-items updates
-> - Assign userclass to donors (users) automatically
 
 ### Questions about this project?
 
