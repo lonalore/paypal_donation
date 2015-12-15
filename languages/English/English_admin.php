@@ -16,8 +16,8 @@ define("LAN_PAYPAL_DONATION_ADMIN_08", "Validate Primary Email Address on IPN me
 define("LAN_PAYPAL_DONATION_ADMIN_09", "Logging failed IPNs");
 define("LAN_PAYPAL_DONATION_ADMIN_10", "Logging failed IPNs using system logs.");
 
-define('LAN_PAYPAL_DONATION_ADMIN_11', 'Menu items');
-define('LAN_PAYPAL_DONATION_ADMIN_12', 'Create menu item');
+define('LAN_PAYPAL_DONATION_ADMIN_11', 'Donation campaigns');
+define('LAN_PAYPAL_DONATION_ADMIN_12', 'Create campaign');
 
 define('LAN_PAYPAL_DONATION_ADMIN_13', 'ID');
 define('LAN_PAYPAL_DONATION_ADMIN_14', 'Title');
@@ -34,14 +34,14 @@ define('LAN_PAYPAL_DONATION_ADMIN_23', 'Currency');
 define('LAN_PAYPAL_DONATION_ADMIN_24', 'Amounts');
 define('LAN_PAYPAL_DONATION_ADMIN_25', 'Create amount');
 
-define('LAN_PAYPAL_DONATION_ADMIN_26', 'Menu item');
+define('LAN_PAYPAL_DONATION_ADMIN_26', 'Donation campaign');
 define('LAN_PAYPAL_DONATION_ADMIN_27', 'Label for amount');
 define('LAN_PAYPAL_DONATION_ADMIN_28', 'Value for amount');
 
-define('LAN_PAYPAL_DONATION_ADMIN_29', 'First you must create a "Menu item"');
+define('LAN_PAYPAL_DONATION_ADMIN_29', 'First you must create a donation campaign');
 define('LAN_PAYPAL_DONATION_ADMIN_30', 'Currency:');
 
-define('LAN_PAYPAL_DONATION_ADMIN_31', '- Select menu item -');
+define('LAN_PAYPAL_DONATION_ADMIN_31', '- Select donation campaign -');
 
 define('LAN_PAYPAL_DONATION_ADMIN_32', 'Date format');
 define('LAN_PAYPAL_DONATION_ADMIN_33', 'Short date format');
@@ -49,7 +49,7 @@ define('LAN_PAYPAL_DONATION_ADMIN_34', 'Long date format');
 define('LAN_PAYPAL_DONATION_ADMIN_35', 'Forum date format');
 define('LAN_PAYPAL_DONATION_ADMIN_36', 'Relative date format');
 
-define('LAN_PAYPAL_DONATION_ADMIN_37', 'Users who can view menu item');
+define('LAN_PAYPAL_DONATION_ADMIN_37', 'Users who can view donation campaign');
 define('LAN_PAYPAL_DONATION_ADMIN_38', 'Users who can donate');
 define('LAN_PAYPAL_DONATION_ADMIN_39', 'PayPal login page language / locale');
 
