@@ -1,6 +1,8 @@
 PayPal Donation (e107 plugin)
 =============================
 
+[![Join the chat at https://gitter.im/lonalore/paypal_donation](https://badges.gitter.im/lonalore/paypal_donation.svg)](https://gitter.im/lonalore/paypal_donation?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Requirements:
 - e107 CMS v2
 - PayPal account
