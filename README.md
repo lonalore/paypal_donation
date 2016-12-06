@@ -1,6 +1,8 @@
 PayPal Donation (e107 plugin)
 =============================
 
+[![Join the chat at https://gitter.im/lonalore/paypal_donation](https://badges.gitter.im/lonalore/paypal_donation.svg)](https://gitter.im/lonalore/paypal_donation?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Requirements:
 - e107 CMS v2
 - PayPal account
@@ -66,3 +68,8 @@ Screenshots
 ![Screenshot 4](https://www.dropbox.com/s/2tcm7ezwvtng4kc/04.png?dl=1)
 
 
+
+## Support on Beerpay
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/lonalore/paypal_donation/badge.svg?style=beer-square)](https://beerpay.io/lonalore/paypal_donation)  [![Beerpay](https://beerpay.io/lonalore/paypal_donation/make-wish.svg?style=flat-square)](https://beerpay.io/lonalore/paypal_donation?focus=wish)
