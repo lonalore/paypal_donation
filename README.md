@@ -18,6 +18,32 @@ Requirements:
 > - Assign userclass to donor (user) automatically
 > - NodeJS integration: real-time menu-items updates with push-notifications
 
+### Installation and configuration
+
+- Create your Paypal Business Account
+- Install PayPal Donation plugin
+- Configure PayPal Donation plugin
+    - Goto PayPal Donation settings page, and set your Paypal (live and sandbox) email address.
+    - Create a donation campaign
+    - Create amounts for your donation campaign
+    - Place your PayPal Donation menu to where you want to display it
+
+### How to test your paypal integration with sandbox
+
+In order to test your paypal integration with sandbox follow these steps:
+
+- **Step 1.** This plugin is using **Classic API** read more [here](https://developer.paypal.com/webapps/developer/docs/classic/).
+- **Step 2.** Register with **paypal.com** and get verified but getting verified takes some time so you should already be registered long before starting testing.
+- **Step 3.** Use your credentials from above to login to **developer.paypal.com**.
+- **Step 4.** Go to Dashboard -> Accounts (under sandbox heading).
+- **Step 5.** Create at least one USER and one BUSINESS (MERCHANT) sandbox accounts. Emails don't have to real because mails are never send.
+- **Step 6.** Setup PayPal Donation plugin to use the sandbox using the sandbox merchant email you created on Step 5.
+- **Step 7.** Login to **sandbox.paypal.com** as USER or MERCHANT to see your balances.
+- **Step 8.** Setup a donation campaign (See **Installation and configuration**).
+- **Step 9.** Test donating using the sandbox USER - you should be redirected to the **sandbox.paypal.com** site and complete the purchase.
+- **Step 10.** The MERCHANT user might have to login to **sandbox.paypal.com** and accept the payment (if its not setup in the settings).
+- **Step 11.** Now you should see the payment in PayPal Donation menu you placed to your website.
+
 ### Questions about this project?
 
 Please feel free to report any bug found. Pull requests, issues, and plugin recommendations are more than welcome!
