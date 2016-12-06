@@ -67,8 +67,6 @@ Screenshots
 ![Screenshot 3](https://www.dropbox.com/s/ni8skhnnog8mhub/03.png?dl=1)
 ![Screenshot 4](https://www.dropbox.com/s/2tcm7ezwvtng4kc/04.png?dl=1)
 
-
-
 ## Support on Beerpay
 Hey dude! Help me out for a couple of :beers:!
 
