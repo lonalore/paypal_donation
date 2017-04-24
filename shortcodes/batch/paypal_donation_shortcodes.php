@@ -213,7 +213,7 @@ class paypal_donation_shortcodes extends e_shortcode
 
 			if((int) $menuItem['pd_custom_amount'] == 1)
 			{
-				$html .= '<div class="radio">';
+				$html .= '<div class="radio form-inline">';
 				$html .= '<label>';
 				$html .= $form->radio('amount', 'custom');
 				$html .= $form->text('custom_amount', '', 80, array(
