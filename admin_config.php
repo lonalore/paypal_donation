@@ -47,6 +47,9 @@ class paypal_donation_admin extends e_admin_dispatcher
 			'caption' => LAN_PAYPAL_DONATION_ADMIN_24,
 			'perm'    => 'P',
 		),
+
+		'divider/one'   => array('divider'=>true),
+
 		'donation/create' => array(
 			'caption' => LAN_PAYPAL_DONATION_ADMIN_12,
 			'perm'    => 'P',
@@ -55,6 +58,9 @@ class paypal_donation_admin extends e_admin_dispatcher
 			'caption' => LAN_PAYPAL_DONATION_ADMIN_25,
 			'perm'    => 'P',
 		),
+
+		'divider/two'   => array('divider'=>true),
+
 		'main/prefs'      => array(
 			'caption' => LAN_PAYPAL_DONATION_ADMIN_01,
 			'perm'    => 'P',
