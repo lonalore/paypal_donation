@@ -113,7 +113,7 @@ class paypal_donation_shortcodes extends e_shortcode
 		return $text;
 	}
 
-	function sc_goal()
+	function sc_goal($parm=null)
 	{
 		$amount = $this->var['menu_item']['pd_goal_amount'];
 		$currency = $this->var['menu_item']['pd_currency'];
@@ -127,7 +127,15 @@ class paypal_donation_shortcodes extends e_shortcode
 			$formatted = number_format($amount, 2, '.', ',');
 		}
 
-		$text = LAN_PAYPAL_DONATION_FRONT_06 . ' <strong>' . $formatted . ' ' . $currency . '</strong>';
+
+		$text = LAN_PAYPAL_DONATION_FRONT_06;
+
+		if(!empty($parm['type']) && $parm['type'] === 'amount')
+		{
+			return $formatted . ' ' . $currency;
+		}
+
+		 $text .= ' <strong>' . $formatted . ' ' . $currency . '</strong>';
 
 		$goalDate = $this->var['menu_item']['pd_goal_date'];
 		if((int) $goalDate > 0)
