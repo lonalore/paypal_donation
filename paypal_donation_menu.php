@@ -31,6 +31,7 @@ class paypal_donation_menu
 	 * @var mixed|null
 	 */
 	private $plugPrefs = null;
+	private $menuPrefs = array();
 
 	/**
 	 * Constructor.
@@ -39,6 +40,7 @@ class paypal_donation_menu
 	{
 		// Get plugin preferences.
 		$this->plugPrefs = e107::getPlugConfig('paypal_donation')->getPref();
+		$this->menuPrefs = e107::getMenu()->pref();
 
 		if(vartrue($_POST['donation'], false))
 		{
@@ -47,6 +49,7 @@ class paypal_donation_menu
 				$this->formSubmit();
 			}
 		}
+
 
 		// Render menu.
 		$this->renderMenu();
@@ -81,7 +84,9 @@ class paypal_donation_menu
 			}
 		}
 
-		e107::getRender()->tablerender(LAN_PAYPAL_DONATION_FRONT_01, $text);
+		$caption = !empty($this->menuPrefs['caption'][e_LANGUAGE]) ? $this->menuPrefs['caption'][e_LANGUAGE] : LAN_PAYPAL_DONATION_FRONT_01;
+
+		e107::getRender()->tablerender($caption, $text);
 		unset($text);
 	}
 
