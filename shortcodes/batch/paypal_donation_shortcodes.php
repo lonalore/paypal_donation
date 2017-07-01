@@ -206,7 +206,11 @@ class paypal_donation_shortcodes extends e_shortcode
 				'class' => 'paypal-donation-form',
 			));
 			$html .= '<div class="form-group">';
-			$html .= '<label>' . LAN_PAYPAL_DONATION_FRONT_14 . '</label>';
+
+			if(!empty($amounts))
+			{
+				$html .= '<label>' . LAN_PAYPAL_DONATION_FRONT_14 . '</label>';
+			}
 
 			foreach($amounts as $key => $amount)
 			{
@@ -222,13 +226,31 @@ class paypal_donation_shortcodes extends e_shortcode
 			if((int) $menuItem['pd_custom_amount'] == 1)
 			{
 				$html .= '<div class="radio form-inline">';
-				$html .= '<label>';
-				$html .= $form->radio('amount', 'custom');
-				$html .= $form->text('custom_amount', '', 80, array(
+
+
+				if(empty($amounts))
+				{
+					$html .= '<div class="input-group">';
+					$html .= '<span class="input-group-addon">'.$this->sc_currency().'</span>';
+					$html .= $form->hidden('amount', 'custom');
+					$html .= $form->text('custom_amount', '', 80, array(
+					'class'       => 'input-sm',
+					'placeholder' => LAN_PAYPAL_DONATION_FRONT_20,
+					));
+
+					$html .= '</div>';
+				}
+				else
+				{
+					$html .= '<label>';
+					$html .= $form->radio('amount', 'custom');
+					$html .= $form->text('custom_amount', '', 80, array(
 					'class'       => 'input-sm',
 					'placeholder' => LAN_PAYPAL_DONATION_FRONT_12,
-				));
-				$html .= '</label>';
+					));
+					$html .= '</label>';
+				}
+
 				$html .= '</div>';
 			}
 

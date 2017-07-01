@@ -25,4 +25,4 @@ define("LAN_PAYPAL_DONATION_FRONT_16", "Kan ikke laste donasjon. Donasjon kampan
 define("LAN_PAYPAL_DONATION_FRONT_17", "Beløpsfeltet er påkrevd. Vennligst velg et beløp.");
 define("LAN_PAYPAL_DONATION_FRONT_18", "Du har ikke angitt en egendefinert beløp.");
 define("LAN_PAYPAL_DONATION_FRONT_19", "Kan ikke laste donasjonskampanje.");
-define("LAN_PAYPAL_DONATION_FRONT_20", "");
+define("LAN_PAYPAL_DONATION_FRONT_20", "Enter an amount");

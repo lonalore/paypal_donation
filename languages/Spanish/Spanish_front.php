@@ -25,4 +25,4 @@ define("LAN_PAYPAL_DONATION_FRONT_16", "No se puede cargar la donación Campaña
 define("LAN_PAYPAL_DONATION_FRONT_17", "El campo Cantidad se requiere. Seleccione una cantidad.");
 define("LAN_PAYPAL_DONATION_FRONT_18", "No ha especificado una cantidad personalizada.");
 define("LAN_PAYPAL_DONATION_FRONT_19", "No se puede cargar la campaña de donación.");
-define("LAN_PAYPAL_DONATION_FRONT_20", "");
+define("LAN_PAYPAL_DONATION_FRONT_20", "Enter an amount");
