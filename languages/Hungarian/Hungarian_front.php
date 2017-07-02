@@ -25,4 +25,4 @@ define("LAN_PAYPAL_DONATION_FRONT_16", "Nem sikerült betölteni a kampányt: é
 define("LAN_PAYPAL_DONATION_FRONT_17", "Az összeg megadása kötelező. Kérlek válassz egy összeget.");
 define("LAN_PAYPAL_DONATION_FRONT_18", "Nem határoztál meg egyéni összeget.");
 define("LAN_PAYPAL_DONATION_FRONT_19", "Nem sikerült betölteni a kampányt.");
-define("LAN_PAYPAL_DONATION_FRONT_20", "");
+define("LAN_PAYPAL_DONATION_FRONT_20", "Enter an amount");
